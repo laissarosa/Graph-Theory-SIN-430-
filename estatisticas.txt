@@ -1,0 +1,18 @@
+Número de vértices: 49948
+Número de arestas: 1298710
+Grau mínimo: 1
+Grau máximo: 112
+Grau médio: 52.0025
+Mediana de grau: 55.0
+
+Número de componentes conexas: 10
+  Componente 1: 25000 vértice(s)
+  Componente 2: 12500 vértice(s)
+  Componente 3: 6250 vértice(s)
+  Componente 4: 3125 vértice(s)
+  Componente 5: 1562 vértice(s)
+  Componente 6: 781 vértice(s)
+  Componente 7: 390 vértice(s)
+  Componente 8: 195 vértice(s)
+  Componente 9: 97 vértice(s)
+  Componente 10: 48 vértice(s)
