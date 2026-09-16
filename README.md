@@ -1,4 +1,4 @@
-# graph_lib — Biblioteca de Grafos (COS242 — Trabalho, Parte 1)
+# Biblioteca de Grafos
 
 Biblioteca orientada a objetos, em Python, para representar e analisar
 grafos **não-direcionados**, conforme o enunciado da Parte 1.
@@ -11,7 +11,7 @@ graph_lib/
 ├── graph.py              # classe abstrata Graph: BFS, DFS, componentes conexas
 ├── adjacency_list.py      # AdjacencyListGraph  (representação por lista de adjacência)
 ├── adjacency_matrix.py    # AdjacencyMatrixGraph (representação por matriz de adjacência)
-├── reader.py              # leitura do arquivo texto de entrada
+├── benchmark.py           # ajuda para executar 100 buscas automatizadas
 └── statistics.py          # cálculo/escrita das estatísticas do grafo
 
 main.py                   # programa de exemplo (linha de comando)
@@ -108,14 +108,3 @@ Mediana de grau: 2
 Número de componentes conexas: 1
   Componente 1: 5 vértice(s)
 ```
-
-## Testes realizados
-
-- Grafo do exemplo do enunciado (Figura 1): estatísticas conferem à mão.
-- Grafo desconexo (3 componentes de tamanhos 3, 2 e 2): resultado correto.
-- Rejeição de laços (`u == v`) com mensagem de erro clara.
-- Grafo grande (n = 10 000, 30 000 arestas, como no exemplo do enunciado):
-  as duas representações produzem exatamente o mesmo resultado; a lista
-  de adjacência é bem mais rápida (~0,15 s) que a matriz (~6 s) para
-  calcular as componentes conexas, o que é esperado dado o custo
-  `O(V)` de `neighbors(v)` na matriz contra `O(deg(v))` na lista.
