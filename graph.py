@@ -63,10 +63,6 @@ class Graph(ABC):
             grafo = AdjacencyListGraph.from_file("grafo_1.txt")
             grafo = AdjacencyMatrixGraph.from_file("grafo_1.txt")
 
-        A classe usada para construir o objeto (`cls`) é justamente a
-        representação escolhida pelo usuário da biblioteca — não é
-        preciso passar nenhuma string ou parâmetro extra indicando qual
-        representação usar.
 
         Formato esperado do arquivo:
             linha 1: número de vértices (n)
@@ -153,16 +149,19 @@ class Graph(ABC):
         self._check_vertex(start)
         parent: Dict[int, Optional[int]] = {start: None}
         level: Dict[int, int] = {start: 0}
-        visited: Set[int] = {start}
+        visited: Set[int] = set()
         stack = [start]
 
         while stack:
             u = stack.pop()
+            if u in visited:
+                continue
+            visited.add(u)
             for w in self.neighbors(u):
-                if w not in visited:
-                    visited.add(w)
+                if w not in parent:
                     parent[w] = u
                     level[w] = level[u] + 1
+                if w not in visited:
                     stack.append(w)
 
         return {"parent": parent, "level": level}
@@ -186,6 +185,58 @@ class Graph(ABC):
 
         components.sort(key=len, reverse=True)
         return components
+
+    def write_search_tree(self, result, filepath):
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write("vertice pai nivel\n")
+            parent = result["parent"]
+            level = result["level"]
+
+            for v in sorted(parent.keys()):
+                pai = parent[v] if parent[v] is not None else "-"
+                f.write(f"{v} {pai} {level[v]}\n")
+
+            
+    def distance(self, u: int, v: int) -> Optional[int]:
+        """
+        Retorna a distância (número de arestas no caminho mínimo) entre
+        os vértices u e v. Retorna None se não houver caminho entre eles
+        (grafo desconexo).
+        """
+        self._check_vertex(u)
+        self._check_vertex(v)
+        result = self.bfs(u)
+        return result["level"].get(v)
+
+
+    def diameter(self) -> int:
+        """
+        Retorna o diâmetro do grafo: a maior distância entre qualquer par
+        de vértices alcançáveis entre si.
+        """
+        maior = 0
+        for v in range(1, self.num_vertices + 1):
+            result = self.bfs(v)
+            maior_local = max(result["level"].values())
+            maior = max(maior, maior_local)
+        return maior
+
+
+    def diameter_approx(self) -> int:
+        """
+        Versão aproximada do diâmetro, usando a técnica de "double sweep":
+        duas BFS ao invés de uma por vértice. Não garante o valor exato,
+        mas é muito mais rápida em grafos grandes.
+        """
+        vertice_inicial = 1
+        result_a = self.bfs(vertice_inicial)
+        a = max(result_a["level"], key=result_a["level"].get)
+
+        result_b = self.bfs(a)
+        b = max(result_b["level"], key=result_b["level"].get)
+
+        return result_b["level"][b]
+
 
     def __repr__(self) -> str:
         return (f"{self.__class__.__name__}(num_vertices={self.num_vertices}, "

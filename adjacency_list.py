@@ -2,11 +2,9 @@
 adjacency_list.py
 
 Implementação de grafo não-direcionado usando lista de adjacência.
-Boa para grafos esparsos: uso de memória proporcional a O(V + E).
 """
 
 from typing import List, Set
-
 from graph import Graph
 
 
