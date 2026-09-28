@@ -14,7 +14,7 @@ Uso:
     python main.py caminho/para/grafo.txt [--repr list|matrix] [--saida relatorio.txt]
 
 Exemplo:
-    python main.py grafos/grafo_1.txt --repr list --saida grafo_1_relatorio.txt --busca bfs --inicio 10 --distancia 10 20 --diametro exato
+    python main.py grafos/grafo_1.txt --repr list --saida grafo1_lista_relatorio.txt --busca bfs --inicio 1 --distancia 10 20 --diametro exato
 """
 
 import argparse
@@ -67,6 +67,7 @@ def main():
     # Um único arquivo de saída (args.saida) recebe estatísticas, tempos de
     # execução, distância e diâmetro. Só a árvore de busca (BFS/DFS) vai
     # para um arquivo separado, por ter formato tabular próprio.
+
     stats = GraphStatistics(grafo)
     print(stats.as_text())
     stats.write_to_file(args.saida)
@@ -87,7 +88,7 @@ def main():
         arquivo_busca = f"{nome_grafo}_{args.busca}.txt"
         grafo.write_search_tree(resultado, arquivo_busca)
         print(f"Árvore de {args.busca.upper()} escrita em: {arquivo_busca}")
-        print(f"Tempo de execução do {args.busca.upper()}: {tempo_gasto:.6f} segundos")
+        #print(f"Tempo de execução do {args.busca.upper()}: {tempo_gasto:.6f} segundos")
         stats.registrar_tempo(args.saida, f"{args.busca.upper()} (início={args.inicio})", tempo_gasto)
 
     if args.distancia is not None:
@@ -100,7 +101,7 @@ def main():
         stats.write_distance_report(u, v, d, args.saida)
         stats.registrar_tempo(args.saida, f"Distância({u},{v})", tempo_gasto)
         print(f"Distância entre {u} e {v} escrita em: {args.saida}")
-        print(f"Tempo de execução da distância: {tempo_gasto:.6f} segundos")
+        #print(f"Tempo de execução da distância: {tempo_gasto:.6f} segundos")
 
     if args.diametro is not None:
         t0 = time.perf_counter()
@@ -114,7 +115,7 @@ def main():
         stats.write_diameter_report(d, args.diametro, args.saida)
         stats.registrar_tempo(args.saida, f"Diâmetro ({args.diametro})", tempo_gasto)
         print(f"Diâmetro escrito em: {args.saida}")
-        print(f"Tempo de execução do diâmetro ({args.diametro}): {tempo_gasto:.6f} segundos")
+        #print(f"Tempo de execução do diâmetro ({args.diametro}): {tempo_gasto:.6f} segundos")
 
 
 if __name__ == "__main__":

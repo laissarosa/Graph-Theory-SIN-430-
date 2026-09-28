@@ -2,4 +2,8 @@
 *.txt
 
 # Documentação
-*.pdf
+descrição_trabalho_P1.pdf
+
+# arquivos 
+/relatorio/
+/__pycache__/

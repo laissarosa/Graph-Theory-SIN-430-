@@ -224,7 +224,7 @@ class Graph(ABC):
 
     def diameter_approx(self) -> int:
         """
-        Versão aproximada do diâmetro, usando a técnica de "double sweep":
+        Versão aproximada do diâmetro:
         duas BFS ao invés de uma por vértice. Não garante o valor exato,
         mas é muito mais rápida em grafos grandes.
         """
