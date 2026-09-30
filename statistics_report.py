@@ -91,12 +91,6 @@ class GraphStatistics:
             f.write(self.as_text())
 
     # ---- Distância entre dois vértices ----
-    #
-    # O valor de `d` já vem calculado de fora (main.py cronometra apenas a
-    # chamada a graph.distance(u, v)); aqui só formatamos e ACRESCENTAMOS
-    # o resultado ao arquivo de saída consolidado (mesmo arquivo das
-    # estatísticas), mantendo a escrita em disco fora da medição de tempo.
-
     def distance_text(self, u: int, v: int, d: Optional[int]) -> str:
         """Formata o resultado de uma consulta de distância entre u e v."""
         if d is None:

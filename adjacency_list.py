@@ -7,9 +7,9 @@ Implementação de grafo não-direcionado usando lista de adjacência.
 from typing import List, Set
 from graph import Graph
 
-
 class AdjacencyListGraph(Graph):
-    """Representação de grafo por lista de adjacência (um set por vértice)."""
+    """Representação de grafo por lista de adjacência (um set por vértice).
+    Uma lista em que cada posição contém um conjunto de inteiros. """
 
     def __init__(self, num_vertices: int):
         super().__init__(num_vertices)
@@ -26,11 +26,6 @@ class AdjacencyListGraph(Graph):
             self._adj[u].add(v)
             self._adj[v].add(u)
             self.num_edges += 1
-
-    def has_edge(self, u: int, v: int) -> bool:
-        self._check_vertex(u)
-        self._check_vertex(v)
-        return v in self._adj[u]
 
     def neighbors(self, v: int) -> List[int]:
         self._check_vertex(v)

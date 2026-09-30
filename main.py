@@ -101,7 +101,6 @@ def main():
         stats.write_distance_report(u, v, d, args.saida)
         stats.registrar_tempo(args.saida, f"Distância({u},{v})", tempo_gasto)
         print(f"Distância entre {u} e {v} escrita em: {args.saida}")
-        #print(f"Tempo de execução da distância: {tempo_gasto:.6f} segundos")
 
     if args.diametro is not None:
         t0 = time.perf_counter()

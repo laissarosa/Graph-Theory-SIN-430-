@@ -38,11 +38,6 @@ class Graph(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def has_edge(self, u: int, v: int) -> bool:
-        """Retorna True se existe aresta entre u e v."""
-        raise NotImplementedError
-
-    @abstractmethod
     def neighbors(self, v: int) -> List[int]:
         """Retorna a lista de vizinhos do vértice v."""
         raise NotImplementedError
@@ -70,7 +65,7 @@ class Graph(ABC):
         """
         with open(filepath, "r", encoding="utf-8") as f:
             raw_lines = (line.strip() for line in f)
-            lines = (line for line in raw_lines if line)  
+            lines = (line for line in raw_lines if line)
 
             try:
                 num_vertices = int(next(lines))
@@ -113,7 +108,7 @@ class Graph(ABC):
         """Retorna a lista de graus de todos os vértices, na ordem 1..n."""
         return [self.degree(v) for v in range(1, self.num_vertices + 1)]
 
-    def bfs(self, start: int) -> Dict[str, Dict[int, Optional[int]]]:
+    def bfs(self, start: int) -> Dict:
         """
         Busca em largura (BFS) a partir do vértice start.
 
@@ -137,7 +132,7 @@ class Graph(ABC):
 
         return {"parent": parent, "level": level}
 
-    def dfs(self, start: int) -> Dict[str, Dict[int, Optional[int]]]:
+    def dfs(self, start: int) -> Dict:
         """
         Busca em profundidade (DFS), implementada de forma iterativa para
         evitar estourar o limite de recursão do Python em grafos grandes.

@@ -26,11 +26,6 @@ class AdjacencyMatrixGraph(Graph):
             self._matrix[v][u] = 1
             self.num_edges += 1
 
-    def has_edge(self, u: int, v: int) -> bool:
-        self._check_vertex(u)
-        self._check_vertex(v)
-        return bool(self._matrix[u][v])
-
     def neighbors(self, v: int) -> List[int]:
         self._check_vertex(v)
         row = self._matrix[v]
